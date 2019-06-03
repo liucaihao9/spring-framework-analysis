@@ -140,23 +140,38 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private volatile Object beanClass;
 
+	/**
+	 * bean的作用范围，对应bean属性的scope
+	 */
 	@Nullable
 	private String scope = SCOPE_DEFAULT;
-
+	/**
+	 * bean是否为抽象，对应bean属性的lazy-init
+	 */
 	private boolean abstractFlag = false;
-
+	/**
+	 * bean是否懒加载，对应bean属性lazy-init
+	 */
 	@Nullable
 	private Boolean lazyInit;
-
+	/**
+	 * 自动注入模式，对应bean属性的autowired
+	 */
 	private int autowireMode = AUTOWIRE_NO;
 
 	private int dependencyCheck = DEPENDENCY_CHECK_NONE;
-
+	/**
+	 * 用来表示一个bean的实例化依靠另一个bean先实例化，对应bean属性的depand-on
+	 */
 	@Nullable
 	private String[] dependsOn;
-
+	/**
+	 * 如果该参数设置为false，那么在自动装配时，不会将该bean作为其他bean的候选者，但是该bean还是可以使用自动装配来装配其他的bean
+	 */
 	private boolean autowireCandidate = true;
-
+	/**
+	 * 当自动装配出现多个bean候选者时，作为首选者，对应bean属性的primary
+	 */
 	private boolean primary = false;
 
 	private final Map<String, AutowireCandidateQualifier> qualifiers = new LinkedHashMap<>();
