@@ -422,6 +422,7 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		String beanName = id;
+		//如果id为空，则拿第一个beanName作为id
 		if (!StringUtils.hasText(beanName) && !aliases.isEmpty()) {
 			beanName = aliases.remove(0);
 			if (logger.isTraceEnabled()) {
@@ -431,6 +432,7 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		if (containingBean == null) {
+			//检查bean的id和别名在bean解析器的上下文是否唯一，要求必须唯一
 			checkNameUniqueness(beanName, aliases, ele);
 		}
 
