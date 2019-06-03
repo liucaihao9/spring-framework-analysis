@@ -77,9 +77,10 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
+	//XmlReaderContext创建的对象
 	@Nullable
 	private XmlReaderContext readerContext;
-
+	//doRegisterBeanDefinitions 131行创建的对象
 	@Nullable
 	private BeanDefinitionParserDelegate delegate;
 

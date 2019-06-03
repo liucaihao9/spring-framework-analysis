@@ -53,7 +53,11 @@ import org.springframework.core.io.Resource;
 @Deprecated
 @SuppressWarnings({"serial", "all"})
 public class XmlBeanFactory extends DefaultListableBeanFactory {
-
+	/**
+	 * XmlBeanfactory初始化时初始化Reader
+	 * Reader的构造函数需要入参一个BeanDefinitionRegistry
+	 * 分析XmlBeanFactory的层次结构可知实现了BeanDenifitionRegistry接口
+	 */
 	private final XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this);
 
 
