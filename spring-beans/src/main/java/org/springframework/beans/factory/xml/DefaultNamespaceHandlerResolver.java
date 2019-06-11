@@ -63,6 +63,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 	private final ClassLoader classLoader;
 
 	/** Resource location to search for. */
+	//默认初始化为META-INF/spring.handler
 	private final String handlerMappingsLocation;
 
 	/** Stores the mappings from namespace URI to NamespaceHandler class name / instance. */
@@ -116,13 +117,16 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 	@Nullable
 	public NamespaceHandler resolve(String namespaceUri) {
 		Map<String, Object> handlerMappings = getHandlerMappings();
+		//从缓存中拿到初始化过的命名空间处理器或者相关的类
 		Object handlerOrClassName = handlerMappings.get(namespaceUri);
 		if (handlerOrClassName == null) {
 			return null;
 		}
+		//如果是NamespaceHandler的对象，那么直接返回
 		else if (handlerOrClassName instanceof NamespaceHandler) {
 			return (NamespaceHandler) handlerOrClassName;
 		}
+		//如果是类
 		else {
 			String className = (String) handlerOrClassName;
 			try {
@@ -133,6 +137,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 				}
 				NamespaceHandler namespaceHandler = (NamespaceHandler) BeanUtils.instantiateClass(handlerClass);
 				namespaceHandler.init();
+				//通过反射创建对象，并且更新namespaceUri这个map，下次直接可以获取创建好的对象
 				handlerMappings.put(namespaceUri, namespaceHandler);
 				return namespaceHandler;
 			}
@@ -161,6 +166,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 						logger.trace("Loading NamespaceHandler mappings from [" + this.handlerMappingsLocation + "]");
 					}
 					try {
+						//配置命名空间和命名空间解析器之间的关系
 						Properties mappings =
 								PropertiesLoaderUtils.loadAllProperties(this.handlerMappingsLocation, this.classLoader);
 						if (logger.isTraceEnabled()) {
