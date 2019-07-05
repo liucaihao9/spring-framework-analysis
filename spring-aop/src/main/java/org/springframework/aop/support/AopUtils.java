@@ -309,6 +309,7 @@ public abstract class AopUtils {
 		List<Advisor> eligibleAdvisors = new ArrayList<>();
 		for (Advisor candidate : candidateAdvisors) {
 			if (candidate instanceof IntroductionAdvisor && canApply(candidate, clazz)) {
+				//获取引介增强
 				eligibleAdvisors.add(candidate);
 			}
 		}

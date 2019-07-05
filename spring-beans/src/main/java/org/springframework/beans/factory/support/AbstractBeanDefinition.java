@@ -1144,6 +1144,10 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 		}
 		else if (count == 1) {
 			// Mark override as not overloaded, to avoid the overhead of arg type checking.
+			/**
+			 * 如果整个对象（包括父类，接口，只有一个需要重写），说明lookup-method或者replace-method没有被程序显式重写
+			 * 避免方法重写导致在之后bean增强时还要根据参数类型进行匹配
+			 */
 			mo.setOverloaded(false);
 		}
 	}
