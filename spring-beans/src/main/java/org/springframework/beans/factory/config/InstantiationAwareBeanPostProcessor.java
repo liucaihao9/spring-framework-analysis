@@ -44,6 +44,10 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#setCustomTargetSourceCreators
  * @see org.springframework.aop.framework.autoproxy.target.LazyInitTargetSourceCreator
  */
+
+/**
+ * 该接口继承于BeanPostProcessor接口，用于当bean实例化后（不对属性进行填充）将bean返回，典型场景时用于生成代理类
+ */
 public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 
 	/**

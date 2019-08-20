@@ -319,6 +319,7 @@ public abstract class AopUtils {
 				// already processed
 				continue;
 			}
+			//对引介增强处理之后，普通增强bean的处理
 			if (canApply(candidate, clazz, hasIntroductions)) {
 				eligibleAdvisors.add(candidate);
 			}

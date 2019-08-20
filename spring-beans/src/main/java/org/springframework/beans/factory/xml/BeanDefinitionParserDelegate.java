@@ -439,7 +439,7 @@ public class BeanDefinitionParserDelegate {
 			//检查bean的id和别名在bean解析器的上下文是否唯一，要求必须唯一
 			checkNameUniqueness(beanName, aliases, ele);
 		}
-
+		//关键代码，此处完成xml解析成beanDefinition
 		AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);
 		if (beanDefinition != null) {
 			//如果beanName为空，按照spring默认的规则生成beanName
@@ -1395,6 +1395,7 @@ public class BeanDefinitionParserDelegate {
 		BeanDefinitionHolder finalDefinition = definitionHolder;
 
 		// Decorate based on custom attributes first.
+		//此处是对自定义参数的解析
 		NamedNodeMap attributes = ele.getAttributes();
 		for (int i = 0; i < attributes.getLength(); i++) {
 			Node node = attributes.item(i);
@@ -1402,6 +1403,7 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		// Decorate based on custom nested elements.
+		//此处对自定义节点的解析
 		NodeList children = ele.getChildNodes();
 		for (int i = 0; i < children.getLength(); i++) {
 			Node node = children.item(i);
